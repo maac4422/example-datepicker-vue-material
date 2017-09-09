@@ -1,60 +1,44 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-  </div>
+	<div id="app">
+		<md-layout md-align="center">
+			<md-layout  md-tag="md-card" md-column
+					md-flex-xlarge="60" 
+					md-flex-large="70" 
+					md-flex-medium="70"
+					md-flex-small="60" 
+					md-flex-xsmall="90" >
+				<md-card-content>
+					<div class="md-input-container md-theme-default md-has-value ">
+						<label v-if="date.time != ''">Date</label>
+						<datepicker
+							:option="option"
+							:date="date">
+						</datepicker>
+					</div>
+				</md-card-content>	
+			</md-layout>
+		</md-layout>
+	</div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
-}
+	import Datepicker from 'vue-datepicker';
+	import optionDatePicker from './util/datePicker.js';
+	export default {
+		name: 'app',
+		components: { datepicker: Datepicker },
+		
+		data(){
+			return{
+				date: {
+					time: '',
+				},
+				option: optionDatePicker
+			}
+		},
+		created(){
+			this.option.placeholder = "Date";
+		}
+	}
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-</style>
+	
